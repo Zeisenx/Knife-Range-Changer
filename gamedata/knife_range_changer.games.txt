@@ -1,0 +1,55 @@
+"Games"
+{
+	"csgo"
+	{
+		"Offsets"
+		{
+			"CKnife_ReachPrimary"
+			{
+				"windows"	"58"
+			}
+			"CKnife_ReachSecondary"
+			{
+				"windows"	"53"
+			}
+			"NEFB_Offset"
+			{
+				"windows"	"3816"
+			}
+		}
+		"Addresses"
+		{
+			"SwingOrStab"
+			{
+				"signature"	"CKnife::SwingOrStab"
+			}
+            "CCSBot_Update"
+			{
+				"signature" "CCSBot::Update"
+			}
+		}
+		"Signatures"
+		{
+			"CKnife::SwingOrStab"
+			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xE4\xF8\x81\xEC\xD8\x01\x00\x00"
+			}
+			"PathCost::Operator"
+			{
+				"library"	"server"
+				"windows"	"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF0\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x83\xEC\x28\x8B\x43\x0C"
+			}
+            "CCSBot::Update"
+            {
+                // 2020-04-22
+                // "CCSBot::Update" xref 검색시 나오는 함수
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xE4\xF8\x83\xEC\x4C\x53\x8B\xD9\x8B\x0D\x2A\x2A\x2A\x2A"
+				
+				// ~ 2020-12-04
+				//"windows"	"\x55\x8B\xEC\x83\xE4\xF8\x83\xEC\x34\x53\x8B\xD9"
+            }
+		}
+	}
+}
