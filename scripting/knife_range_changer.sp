@@ -6,7 +6,7 @@ public Plugin myinfo =
 {
 	name = "Knife Range Changer",
 	author = "Zeisen",
-	version = "1.0",
+	version = "1.0.1",
 	description = "",
 	url = "http://steamcommunity.com/profiles/76561198002384750"
 }
@@ -19,6 +19,9 @@ int g_primaryOffset;
 int g_secondaryOffset;
 
 ConVar g_cvPrimaryRange, g_cvSecondaryRange;
+
+#define DEFAULT_PRIMARY_RANGE 48
+#define DEFAULT_SECONDARY_RANGE 32
 
 public void OnPluginStart()
 {
@@ -45,16 +48,21 @@ public void OnPluginStart()
 	if (!DHookEnableDetour(g_detour, false, Detour_OnSwingOrStab))
 		SetFailState("Failed to detour CKnife::SwingOrStab.");
 	
-	g_cvPrimaryRange = CreateConVar("kniferange_primary", "48");
-	g_cvSecondaryRange = CreateConVar("kniferange_secondary", "32");
+	char strBuffer[4];
+
+	IntToString(DEFAULT_PRIMARY_RANGE, strBuffer, sizeof(strBuffer));
+	g_cvPrimaryRange = CreateConVar("kniferange_primary", strBuffer);
+
+	IntToString(DEFAULT_SECONDARY_RANGE, strBuffer, sizeof(strBuffer));
+	g_cvSecondaryRange = CreateConVar("kniferange_secondary", strBuffer);
 
 	delete gameConf;
 }
 
 public void OnPluginEnd()
 {
-	StoreToAddress(g_addrSwingOrStab+view_as<Address>(g_primaryOffset), 48, NumberType_Int32);
-	StoreToAddress(g_addrSwingOrStab+view_as<Address>(g_secondaryOffset), 32, NumberType_Int32);
+	StoreToAddress(g_addrSwingOrStab+view_as<Address>(g_primaryOffset), DEFAULT_PRIMARY_RANGE, NumberType_Int32);
+	StoreToAddress(g_addrSwingOrStab+view_as<Address>(g_secondaryOffset), DEFAULT_SECONDARY_RANGE, NumberType_Int32);
 }
 
 public MRESReturn Detour_OnSwingOrStab(int knife, Handle hParams)
